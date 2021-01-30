@@ -19,7 +19,9 @@
 		<div class="login_info">
 			<ul>
 				<li>ようこそ<c:out value="${currentUser.name}"/>さん</li>
-				<li><a href="logout">ログアウト</a></li>
+				<li>
+					<a href="logout">ログアウト</a>
+				</li>
 			</ul>
 		</div>
 	</header>
@@ -42,24 +44,17 @@
 				<th colspan="3">操作</th>
 			</tr>
 
-			<c:forEach var="item" items="${items}">
+			<c:forEach var="item" items="${items}" varStatus="s">
+				<c:set var="className"></c:set>
 				<c:choose>
-				<c:when test="${not empty item.finishedDate}">
-					<c:set var="className">finished</c:set>
-				</c:when>
-				<c:otherwise>
-					<c:choose>
-					<c:when test="${item.user.id == currentUser.id}">
-						<c:set var="className">mine</c:set>
+					<c:when test="${not empty item.finishedDate}">
+						<c:set var="className">finished</c:set>
 					</c:when>
 					<c:otherwise>
-						<c:set var="className">others</c:set>
+						<c:if test="${item.expired}">
+							<c:set var="className">warning</c:set>
+						</c:if>
 					</c:otherwise>
-					</c:choose>
-					<c:if test="${item.expired}">
-						<c:set var="className">${className}-warning</c:set>
-					</c:if>
-				</c:otherwise>
 				</c:choose>
 
 				<tr class="${className}">
