@@ -10,6 +10,6 @@
     <Root level="debug">
       <AppenderRef ref="Console"/>
     </Root>
-    <logger name="jp.co.miraino_katachi.todo_sample" level="trace"/>
+    <logger name="jp.co.miraino_katachi.todo" level="trace"/>
   </Loggers>
 </Configuration>
